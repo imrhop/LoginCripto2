@@ -1,5 +1,5 @@
-<?php echo "Hola" ?>
-<!-- <!DOCTYPE html>
+<?php ?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="utf-8">
@@ -51,4 +51,4 @@
 
 	
 </body>
-</html> -->
+</html>
