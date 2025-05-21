@@ -11,8 +11,8 @@
 <body>
 	<div class="navbar">
 		<a href="inicio.php" class="logo"><img src="../img/Divan.png"></a>
+		<p style="font-size: 10px;">Protege tus datos, cifra tu mundo. Únete a nuestra plataforma segura.</p>
 		<h1>Bienvenido <?php echo htmlspecialchars($_SESSION['nombre']); ?></h1>
-		<p>Protege tus datos, cifra tu mundo. Únete a nuestra plataforma segura.</p>
 		<div class="navbar-links">
 			<a href="">Descargar PDF</a>
 	        <a href="../php/cerrarSesion.php">Cerrar Sesión</a>
