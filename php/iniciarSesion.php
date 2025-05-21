@@ -7,6 +7,7 @@
 	<title>Iniciar Sesión</title>
 	<link rel="icon" href="../img/logo.ico" type="image/x-icon">
 	<link rel="stylesheet" href="../css/style.css">
+	<script src="../js/HashContra.js"></script>
 </head>
 <body>
 	<div class="navbar">
@@ -17,12 +18,13 @@
 	    </div>
 	</div>
 	<h2>Iniciar Sesión</h2>
-	<form action="../php/procesarLogin.php" method="POST">
+	<form action="../php/procesarLogin.php" method="POST" id="formLogin">
 		<label for="nombre_usuario">Nombre de Usuario:</label><br>
 		<input type="text" id="nombre_usuario" name="nombre_usuario" required><br><br>
 
 		<label for="contrasena">Contraseña:</label><br>
-		<input type="password" id="contrasena" name="contrasena" required><br><br>
+		<input type="password" id="contrasena" name="contrasena_input" required><br><br>
+		 <input type="hidden" id="contrasena_hashed" name="contrasena">
 
 		<a href="recuperarContrasena.php">¿Olvidaste tu contraseña?</a><br>
 		<input type="submit" value="Enviar">

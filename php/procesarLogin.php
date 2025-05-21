@@ -26,7 +26,7 @@ try {
         $stmt->bind_result($usuario_id, $nombre, $ap_paterno, $ap_materno,$hash_guardado, $estado);
         $stmt->fetch();
 
-        if (hash('sha256', $contrasena) === $hash_guardado) {
+        if ($contrasena === $hash_guardado) {
             // Verificar estado de cuenta
             $_SESSION["usuario_id"] = $usuario_id;
             $_SESSION["nombre"] = $nombre . ' ' . $ap_paterno . ' ' . $ap_materno;

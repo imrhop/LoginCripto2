@@ -16,8 +16,8 @@ $ap_paterno     = limpiar($_POST['ap_paterno']);
 $ap_materno     = limpiar($_POST['ap_materno']);
 
 // Hashear la contraseña con SHA-256
-$contrasena_hash = hash('sha256', $contrasena);
-
+//$contrasena_hash = hash('sha256', $contrasena);
+$contrasena_hash = $contrasena;
 // Generar código de verificación
 $codigo_verificacion = strtoupper(substr(md5(uniqid(mt_rand(), true)), 0, 6));
 $fecha_envio = date('Y-m-d H:i:s');
