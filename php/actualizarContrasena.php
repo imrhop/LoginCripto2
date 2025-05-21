@@ -1,7 +1,6 @@
 <?php
 session_start();
-// require_once 'conexion.php';
-require_once '../db.php';
+require_once 'conexion.php';
 
 function limpiar($dato) {
     return htmlspecialchars(trim($dato));
