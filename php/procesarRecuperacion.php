@@ -1,6 +1,8 @@
 <?php
 session_start();
-require_once 'conexion.php';
+// require_once 'conexion.php';
+require_once '../db.php';
+
 include __DIR__ . '/phpMailer/enviarCorreo.php';
 
 function limpiar($dato) {
