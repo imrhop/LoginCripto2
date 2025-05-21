@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Verificación de cuenta</title>
+	<link rel="icon" href="../img/logo.ico" type="image/x-icon">
+	<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+	<div class="navbar">
+		<a href="../index.html" class="logo"><img src="../img/Divan.png"></a>
+	</div>
+	<h2>Verificar Cuenta</h2>
+	<form action="../php/procesarValidacion.php" method="POST">
+		<label for="codigo_validacion">Ingresa el código de verificación</label><br>
+		<input type="text" id="codigo" name="codigo" required><br><br>
+
+		<input type="submit" value="Enviar">
+	</form>
+</body>
+</html>
