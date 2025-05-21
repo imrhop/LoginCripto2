@@ -1,18 +1,11 @@
 <?php
-// Datos de conexión
-$host = "localhost";
-$usuario = "root";           // Por defecto en XAMPP es 'root'
-$contrasena = "";            // Sin contraseña por defecto
-$base_datos = "cryptologin";
+$host = getenv("DB_HOST");
+$user = getenv("DB_USER");
+$pass = getenv("DB_PASS");
+$db   = getenv("DB_NAME");
 
-// Crear conexión
-$conn = new mysqli($host, $usuario, $contrasena, $base_datos);
-
-// Verificar conexión
+$conn = new mysqli($host, $user, $pass, $db);
 if ($conn->connect_error) {
-    die("Error de conexión: " . $conn->connect_error);
+    die("Conexión fallida: " . $conn->connect_error);
 }
-
-// Opcional: configurar charset
-$conn->set_charset("utf8");
 ?>
