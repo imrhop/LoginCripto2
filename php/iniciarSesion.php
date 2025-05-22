@@ -11,7 +11,7 @@
 </head>
 <body>
 	<div class="navbar">
-		<a href="../index.html" class="logo"><img src="../img/Divan.png"></a>
+		<a href="../index.php" class="logo"><img src="../img/Divan.png"></a>
 		<p style=' color: #ffffff;font-style: italic; text-align: center; margin-top: 20px; margin-left: 5px;'>
                 Protege tus datos, cifra tu mundo
         	</p>
