@@ -14,7 +14,7 @@
 		<p style="font-size: 10px;">Protege tus datos, cifra tu mundo.</p>
 		<h1>Bienvenido <?php echo htmlspecialchars($_SESSION['nombre']); ?></h1>
 		<div class="navbar-links">
-			<a href="">Descargar PDF</a>
+			<a href="#" onclick="descargarPDF()">Descargar PDF</a>
 	        <a href="../php/cerrarSesion.php">Cerrar Sesión</a>
 	    </div>
 	</div>
@@ -26,31 +26,84 @@
 		<a href="dato4.php">Dato 4</a>
 		<a href="dato5.php">Dato 5</a>
 	</div>
-	<div>
+	<div id="contenido-pdf2">
 		<h1>DATO 2</h1>
 		<h2>Enigma y Alan Turing: el criptohéroe de la historia</h2>
-		<p>¿Qué era la Enigma?
-			<br>
-Una máquina electromecánica de cifrado utilizada por los nazis. Su complejidad radicaba en el uso de tres o más rotores configurables que alteraban la sustitución de letras en cada pulsación, y en un plugboard (tablero de conexiones) que intercambiaba pares de letras antes del cifrado principal.
-<br>
-Número estimado de configuraciones posibles:
-<br>
-Más de 150 trillones (10¹⁴), sin contar las variaciones diarias de configuración.
-<br>
-¿Cómo lo rompió Turing?
-<br>
-Alan Turing y su equipo en Bletchley Park diseñaron una máquina llamada Bombe, inspirada en un diseño polaco anterior (la bomba kryptologiczna), que usaba principios de lógica booleana y circuitos eléctricos para descartar configuraciones imposibles rápidamente.
-Utilizaban también cribs (fragmentos de texto que se asumía aparecían en los mensajes, como "Heil Hitler") para reducir las combinaciones.
-<br>
-Impacto histórico:
-<br>
-Acortó la Segunda Guerra Mundial entre 2 y 4 años.
 
-Salvó entre 14 y 21 millones de vidas humanas, según estimaciones históricas.
+		<h3>¿Qué era la Enigma?</h3>
+		<p>
+			Una <strong>máquina electromecánica de cifrado</strong> utilizada por los nazis. Su complejidad radicaba en el uso de tres o más rotores configurables que alteraban la sustitución de letras en cada pulsación, y en un plugboard (tablero de conexiones) que intercambiaba pares de letras antes del cifrado principal.
+		</p>
+		<div>
+			<img src="../img/enigma.jpg" alt="Máquina Enigma" style="max-width: 300px; width: 100%; height: auto; display: block; margin: 20px auto;">
+		</div>
 
-Fue la base conceptual para las primeras computadoras digitales modernas.</p>
+		<h3>¿Cuántas configuraciones posibles?</h3>
+		<p>
+			Más de <strong>150 trillones</strong> (10¹⁴), sin contar las variaciones diarias de configuración.
+		</p>
+
+		<h3>¿Cómo lo rompió Turing?</h3>
+		<p>
+			Alan Turing y su equipo en <strong>Bletchley Park</strong> diseñaron una máquina llamada <strong>Bombe</strong>, inspirada en un diseño polaco anterior (la bomba kryptologiczna). Usaba lógica booleana y electricidad para descartar configuraciones imposibles rápidamente.
+		</p>
+		<p>
+			También utilizaban <em>cribs</em> (fragmentos de texto que se creía aparecían en los mensajes, como <strong>"Heil Hitler"</strong>) para reducir las combinaciones.
+		</p>
+
+		<div>
+			<img src="../img/turing.jpg" alt="Alan Turing"style="max-width: 300px; width: 100%; height: auto; display: block; margin: 20px auto;">
+		</div>
+
+		<h3>Impacto histórico</h3>
+		<ul>
+			<li>Acortó la Segunda Guerra Mundial entre 2 y 4 años.</li>
+			<li>Salvó entre <strong>14 y 21 millones de vidas humanas</strong>, según estimaciones.</li>
+			<li>Fue la base conceptual para las primeras computadoras digitales modernas.</li>
+		</ul>
 	</div>
-	
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+	<script>
+function descargarPDF() {
+	const original = document.getElementById("contenido-pdf2");
+	const clon = original.cloneNode(true);
+
+	// Aplicar color negro al texto del clon (sin afectar la página)
+	clon.querySelectorAll("*").forEach(el => {
+		el.style.color = "black";
+	});
+
+	// Agregar logo y slogan al encabezado del PDF
+	const encabezado = document.createElement("div");
+	encabezado.style.textAlign = "center";
+	encabezado.style.marginBottom = "20px";
+
+	const logo = document.createElement("img");
+	logo.src = "../img/Divan.png";
+	logo.style.height = "80px";
+	logo.style.marginBottom = "10px";
+	encabezado.appendChild(logo);
+
+	const slogan = document.createElement("p");
+	slogan.textContent = "Protege tus datos, cifra tu mundo.";
+	slogan.style.fontStyle = "italic";
+	slogan.style.fontSize = "14px";
+	slogan.style.color = "black";
+	encabezado.appendChild(slogan);
+
+	clon.insertBefore(encabezado, clon.firstChild);
+
+	// Generar el PDF con html2pdf
+	html2pdf().set({
+		margin: 0.5,
+		filename: 'dato2_completo.pdf',
+		image: { type: 'jpeg', quality: 0.98 },
+		html2canvas: { scale: 2 },
+		jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+	}).from(clon).save();
+}
+</script>
 
 
 </body>
