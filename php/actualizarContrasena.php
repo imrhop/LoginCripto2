@@ -1,5 +1,5 @@
 <?php
-session_start();
+//session_start();
 require_once 'conexion.php';
 
 function limpiar($dato) {
@@ -7,12 +7,11 @@ function limpiar($dato) {
 }
 
 // Verifica que haya sesión activa
-if (!isset($_SESSION["usuario_id"])) {
+/*if (!isset($_SESSION["usuario_id"])) {
     echo "<script>alert('Sesión no válida. Inicia sesión nuevamente.'); window.location.href='../html/iniciarSesion.html';</script>";
     exit;
-}
-
-$usuario_id = $_SESSION["usuario_id"];
+}*/
+$token = $_POST['token'];
 $contrasena = limpiar($_POST['contrasena']);
 $confirmar  = limpiar($_POST['confirmar_contrasena']);
 
@@ -22,9 +21,40 @@ if ($contrasena !== $confirmar) {
     exit;
 }
 
-// Hash de la nueva contraseña (usando SHA-256)
-$contrasena_hash = hash('sha256', $contrasena);
 
+$stmt = $conn->prepare("SELECT usuario_id FROM tokens_recuperacion WHERE token = ? AND expiracion > NOW() AND usado = 0");
+$stmt->bind_param("s", $token);
+$stmt->execute();
+$stmt->bind_result($usuario_id);
+
+// Hash de la nueva contraseña (usando SHA-256)
+$contrasena_hash = $contrasena;
+
+if ($stmt->fetch()) {
+    $stmt->close();
+
+    $stmt = $conn->prepare("UPDATE credenciales SET contrasena_hash = ? WHERE usuario_id = ?");
+    $stmt->bind_param("si", $contrasena_hash, $usuario_id);
+    $stmt->execute();
+    $stmt->close();
+
+     $stmt = $conn->prepare("UPDATE estado_usuario SET estado = 1 WHERE usuario_id = ?");
+        $stmt->bind_param("i", $usuario_id);
+        $stmt->execute();
+        $stmt->close();
+
+    $stmt = $conn->prepare("UPDATE tokens_recuperacion SET usado = 1 WHERE token = ?");
+    $stmt->bind_param("s", $token);
+    $stmt->execute();
+
+    echo "<script>alert('Contraseña actualizada exitosamente.'); window.location.href='../php/iniciarSesion.php';</script>";
+} else {
+    $conn->rollback();
+    echo "El token es inválido o ha expirado.";
+}
+
+
+/*
 try {
     // Iniciar transacción
     $conn->begin_transaction();
@@ -49,4 +79,4 @@ try {
     $conn->rollback();
     echo "Error al actualizar contraseña: " . $e->getMessage();
 }
-?>
+?>*/
