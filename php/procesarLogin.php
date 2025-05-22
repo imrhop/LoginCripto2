@@ -31,11 +31,10 @@ try {
             $_SESSION["usuario_id"] = $usuario_id;
             $_SESSION["nombre"] = $nombre . ' ' . $ap_paterno . ' ' . $ap_materno;
             $_SESSION["estado"] = $estado;
-
             if ($estado === 0) {
                 echo "<script>window.location.href='../html/validarCuenta.html';</script>";
             } else if ($estado === 2) {
-                echo "<script>window.location.href='../html/cambiarContrasena.html';</script>";
+               // echo "<script>window.location.href='../html/cambiarContrasena.html';</script>";
             } else if ($estado === 1) {
                 echo "<script>window.location.href='../php/inicio.php';</script>";
             } else {
