@@ -11,6 +11,9 @@
 <body>
 	<div class="navbar">
 		<a href="../index.html" class="logo"><img src="../img/Divan.png"></a>
+		<p style=' color: #ffffff;font-style: italic; text-align: center; margin-top: 20px; margin-left: 5px;'>
+                Protege tus datos, cifra tu mundo
+        	</p>
 		<div class="navbar-links">
 	        <a href="iniciarSesion.php">Iniciar Sesión</a>
 	        <a href="crearCuenta.php">Crear Cuenta</a>
